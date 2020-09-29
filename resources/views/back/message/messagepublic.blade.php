@@ -27,14 +27,30 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            @foreach($messages as $message)
-                                                <td class="text-center">{{$message->user()->fname}}</td>
+                                        @foreach($messages->where('type','get') as $message)
+                                            <tr>
+                                                <td class="text-center">{{$message->user()->first()['fname'] . $message->user()->first()['lname']}}</td>
                                                 <td class="text-center">{{$message->name}}</td>
                                                 <td class="text-center">{{$message->email}}</td>
                                                 <td class="text-center">{!! Str::limit($message->description,20) !!}</td>
-                                            @endforeach
-                                        </tr>
+                                                <td class="text-center">
+
+                                                    <button class="btn btn-default btn-rounded btn-sm"
+                                                            data-toggle="modal" data-target="#{{$message['id']}}"
+                                                            type="button"><i class="fa fa-envelope"></i> نمایش
+                                                    </button>
+                                                    <form method="post"
+                                                          action="{{route('messages.delete',['id'=> $message->id])}}"
+                                                          style="display: inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-default btn-rounded btn-sm"
+                                                                type="submit"><i class="icon-trash"></i> حذف
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -45,4 +61,24 @@
             </div>
         </div>
     </div>
+
+    @foreach($messages as $message)
+        <div class="modal fade" id="{{$message['id']}}" tabindex="-1" role="dialog" aria-labelledby="{{$message['id']}}"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="{{$message['id']}}">{{$message->name}}</h5>
+                    </div>
+                    <div class="modal-body">
+                        {{$message->description}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">بستن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection

@@ -43,18 +43,27 @@
                             </h5>
                         </div>
                         <div class="col-md-3">
-                            <span style="font-family: 'IRANSansWeb', sans-serif;font-size: 15px">شماره کارت بانک ملت :</span>
+                            <span
+                                style="font-family: 'IRANSansWeb', sans-serif;font-size: 15px">شماره کارت بانک ملت :</span>
                         </div>
                         <div class="col-md-3">
-                            <span style="font-family: 'IRANSansWeb', sans-serif;font-size: 15px;color: red" >6104337915729857</span>
+                            <span style="font-family: 'IRANSansWeb', sans-serif;font-size: 15px;color: red">6104337915729857</span>
                         </div>
                         <div class="col-md-4">
                             <span style="font-family: 'IRANSansWeb', sans-serif;font-size: 15px">بنام علی یزدانی</span>
                         </div>
                     </div>
-                    <form class="form-horizontal" action="{{route('messages')}}" method="post">
+
+
+                    <form class="form-horizontal" action="{{route('contact.messages')}}" method="post">
+                        @csrf
                         <fieldset class="mt-5">
                             <h3 class="subtitle">با ما ارتباط برقرار کنید</h3>
+                            @if(Session::has('message'))
+                                <div class="alert alert-success container" style="width: 100%">
+                                    <div>{{ Session('message') }}</div>
+                                </div>
+                            @endif
                             <div class="form-group required">
                                 <label class="col-md-2 col-sm-3 control-label" for="input-name">نام شما</label>
                                 <div class="col-md-10 col-sm-9">
@@ -64,19 +73,29 @@
                             <div class="form-group required">
                                 <label class="col-md-2 col-sm-3 control-label" for="input-email">آدرس ایمیل</label>
                                 <div class="col-md-10 col-sm-9">
-                                    <input type="text" name="email" value="" id="input-email" class="form-control" required/>
+                                    <input type="text" name="email" value="" id="input-email" class="form-control"
+                                           required/>
                                 </div>
                             </div>
                             <div class="form-group required">
                                 <label class="col-md-2 col-sm-3 control-label" for="input-enquiry">پرسش</label>
                                 <div class="col-md-10 col-sm-9">
                                     <textarea name="description" rows="10" id="input-enquiry"
-                                              class="form-control" ></textarea>
+                                              class="form-control"></textarea>
                                 </div>
                             </div>
-
-                            {{--                        {!! NoCaptcha::renderJs() !!}--}}
-
+                            <div class="row">
+                                <div class="col-md-5">
+                                    {!! NoCaptcha::display() !!}
+                                </div>
+                                <div class="col-md-6">
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <span class="help-block">
+                                            <h3 class="text-danger">{{ $errors->first('g-recaptcha-response') }}</h3>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                         </fieldset>
                         <div class="buttons">
                             <div class="pull-right">

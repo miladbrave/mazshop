@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4108efb-c790-428d-82fa-2870f5b18bed" name="Default Changelist" comment="" />
+    <list default="true" id="f4108efb-c790-428d-82fa-2870f5b18bed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/captcha.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/back/admin/adminmessage.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/back/dashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/back/dashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/front/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/front/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_24_185154_create_message_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_24_185154_create_message_tables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/front/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/front/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/layout/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/layout/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/message/adminmessage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/message/adminmessage.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/back/message/messagepublic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back/message/messagepublic.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/contact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/layout/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/layout/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +55,9 @@
         <option value="Vue Single File Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -146,28 +170,35 @@
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/vendor/anhskohbo/no-captcha" />
+      <path value="$PROJECT_DIR$/vendor/consoletvs/charts" />
+      <path value="$PROJECT_DIR$/vendor/balping/json-raw-encoder" />
     </include_path>
   </component>
   <component name="ProjectId" id="1dRALbrK4GdmT2qb5ssP7DX0UNb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="F:/New folder/them/admin/graph-c3.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pip/routes/web.php" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front\js" />
-      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front" />
-      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\ads" />
-      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\slider" />
-      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\back\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front\css" />
       <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\app\Http\Controllers\front" />
       <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\banner" />
       <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front\img" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\admin" />
+      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front\js" />
+      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\public\front" />
+      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\ads" />
+      <recent name="F:\SETUPPROG\WampServer.3.1.9.x64\www\shop\resources\views\back\slider" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -253,11 +284,28 @@
       <workItem from="1600871685747" duration="17734000" />
       <workItem from="1601017266774" duration="63425000" />
       <workItem from="1601275643885" duration="28673000" />
-      <workItem from="1601317091878" duration="250000" />
+      <workItem from="1601317091878" duration="2728000" />
+      <workItem from="1601359512587" duration="14040000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

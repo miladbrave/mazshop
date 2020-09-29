@@ -10,6 +10,7 @@
             <ul class="nav">
                 <li><a href="{{route('admin.index')}}"><span class="title">ادمین</span></a></li>
                 <li><a href="{{route('user')}}"><span class="title"> ویرایش اعضا</span></a></li>
+                <li><a href="{{route('mainmessage')}}"><span class="title">درج پیام</span></a></li>
             </ul>
         </li>
         <li class="has-sub">
@@ -60,6 +61,7 @@
             <a href="collapsed-sidebar.html"><i class="fa fa-envelope"></i><span class="title">پیام ها</span></a>
             <ul class="nav collapse">
                 <li><a href="{{route('messages')}}"><span class="title">پیام های دریافتی</span></a></li>
+                <li><a href="{{route('send.messages')}}"><span class="title">ارسال پیام</span></a></li>
             </ul>
         </li>
     </ul>

@@ -19,14 +19,10 @@ Route::get('removeproduct/{id}','front\HomeController@removeproduct')->name('rem
 Route::get('addqty/{id}','front\HomeController@addqty')->name('add.qty');
 Route::patch('updateUser','front\HomeController@updateuser')->name('updateuser');
 Route::get('profile','front\HomeController@profile')->name('profile');
-Route::post('messages/{id?}','front\HomeController@message')->name('messages');
-
-
-
+Route::post('messages/{id?}','front\HomeController@message')->name('contact.messages');
 Route::get('payStatus','front\PayController@payStatus')->name('payStatus');
 Route::get('pay','front\PayController@pay')->name('pay');
 Route::any('paypack_callback','front\PayController@paypack_callback')->name('paypack_callback');
-Route::get('check/{id}/{album}/{title}','paymentController@check')->name('check');
 
 
 
@@ -64,6 +60,11 @@ Route::group(['prefix'=>'administrator'], function () {
     Route::delete('attributevalue/delete/{id}','back\attributecontroller@destroyAttributeValue')->name('destroyAttributeValue');
     Route::get('photoDestroy/{id}','back\productController@photoDestroy')->name('photoDestroy');
     Route::get('messages','back\dashboardController@messages')->name('messages');
+    Route::get('adminMessage','back\dashboardController@sendmessages')->name('send.messages');
+    Route::delete('messagesDelete/{id}','back\dashboardController@delete')->name('messages.delete');
+    Route::post('sendmessage','back\dashboardController@send')->name('messages.send');
+    Route::post('sendmessagemain','back\dashboardController@sendmain')->name('messages.send.main');
+    Route::get('mainmessage','back\dashboardController@mainmessage')->name('mainmessage');
 
 });
 
@@ -71,5 +72,6 @@ Route::group(['prefix'=>'api'], function () {
     Route::get('categories','back\categoryController@first');
     Route::post('categories/attribute','back\categoryController@getAttribute');
     Route::post('searchProducts','back\productController@apiGetProducts');
+    Route::post('messageapi','front\HomeController@messageApi');
 });
 

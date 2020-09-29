@@ -19,6 +19,7 @@ class CreateMessageTables extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->string('email');
             $table->text('description')->nullable();
+//            $table->string('type');
             $table->timestamps();
         });
     }

@@ -12,9 +12,11 @@ use App\Purchlist;
 use App\Slider;
 use App\User;
 use App\Userlist;
-use http\Message;
+use App\Message;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
 
 class HomeController extends Controller
 {
@@ -209,13 +211,35 @@ class HomeController extends Controller
 
     public function message(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'g-recaptcha-response' => 'required|captcha',
+            'email' => 'required|email',
+            'description' => 'required',
+        ],[
+            'g-recaptcha-response.required' => 'لطفا اعتبار سنجی کنید',
+            'g-recaptcha-response.captcha' => 'مشکل در کپچرا.لطفا بعدا امتحان کنید.',
+            'emai.required' => 'لطفا ایمیل خود را وارد کنید.',
+            'emai.email' => 'لطفا ایمیل معتبر وارد کنید.',
+            'description.required' => 'لطفا متن خود را وارد کنید.',
+        ]);
+        $validator->validate();
+
         $message = new Message();
         $message->name = $request->name;
-        $message->emial = $request->email;
+        $message->email = $request->email;
         $message->description = $request->description;
+        $message->type = "get";
         $message->save();
 
+        Session::flash('message', ' با تشکر از شما، نظر شما ارسال شد.');
+
         return back();
+    }
+
+    public function messageApi()
+    {
+        $message = Message::where('type','public')->latest('created_at');
+        return response()->json($message, 200);
     }
 
 }
