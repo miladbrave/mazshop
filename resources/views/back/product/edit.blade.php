@@ -10,7 +10,7 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
+                                    <span class="fa fa-cart-plus"></span>
                                     ویرایش محصول
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
@@ -25,7 +25,7 @@
                                             <div class="form-group @if($errors->has('faname')) has-error @endif">
                                                 <label><span class="text-danger">*</span>نام محصول (فارسی)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                                                     <input type="text" class="form-control" name="faname" required
                                                            value="{{$product->name}}">
                                                 </div>
@@ -35,7 +35,7 @@
                                             <div class="form-group @if($errors->has('laname')) has-error @endif">
                                                 <label><span class="text-danger">*</span>نام محصول (لاتین)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                                                     <input type="text" class="form-control" name="laname" required
                                                            value="{{$product->lname}}">
                                                 </div>
@@ -45,7 +45,7 @@
                                             <div class="form-group @if($errors->has('laname')) has-error @endif">
                                                 <label>تعداد</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
                                                     <input type="number" class="form-control" name="count" required
                                                            value="{{$product->count}}">
                                                 </div>
@@ -72,7 +72,7 @@
                                             <div class="form-group @if($errors->has('price')) has-error @endif">
                                                 <label><span class="text-danger">*</span>قیمت (تومان)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
                                                     <input type="text" class="form-control" name="price" required
                                                            value="{{$product->price}}">
                                                 </div>
@@ -82,7 +82,7 @@
                                             <div class="form-group @if($errors->has('price')) has-error @endif">
                                                 <label>تخفیف (درصد)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                                                     <input type="text" class="form-control" name="discount" required
                                                            value="{{$product->discount}}">
                                                 </div>

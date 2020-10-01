@@ -10,14 +10,15 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-tag"></span>
+                                    <span class="fa fa-gear"></span>
                                     ویرایش ویژگی ها
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
                                 </h1>
-                                <form action="{{route('attributeupdate',$attributes->id)}}" method="post">
+                                <form action="{{route('attribute.update',$attributes->id)}}" method="post">
                                     @csrf
+                                    @method('PATCH')
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group @if($errors->has('title')) has-error @endif">

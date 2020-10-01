@@ -21,7 +21,6 @@
     <link href="{{asset('back/css/plugins/select2/select2.css')}}" rel="stylesheet">
 
 
-
 </head>
 <body>
 

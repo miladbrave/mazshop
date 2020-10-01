@@ -10,13 +10,13 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
+                                    <span class="fa fa-file"></span>
                                     افزودن دسته بندی جدید
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
                                 </h1>
-                                <form action="{{route('createcategory')}}" method="post">
+                                <form action="{{route('category.store')}}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -24,7 +24,7 @@
                                                 <label><span class="text-danger">*</span>نام دسته بندی (زیر
                                                     دسته)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-file"></i></span>
                                                     <input type="text" class="form-control" name="title" required
                                                            value="{{old('title')}}">
                                                 </div>
@@ -52,7 +52,7 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-users"></span>
+                                    <span class="fa fa-folder-open"></span>
                                     دسته بندی
                                     <hr>
                                 </h1>
@@ -79,7 +79,7 @@
                                                         </td>
                                                     <td class="text-center">
                                                         <form method="post"
-                                                              action="{{route('categorydestroy',$subcategory->id)}}"
+                                                              action="{{route('category.destroy',$subcategory->id)}}"
                                                               style="display: inline">
                                                             @csrf
                                                             @method('delete')
@@ -87,7 +87,7 @@
                                                                     type="submit"><i class="icon-eye"></i> حذف
                                                             </button>
                                                         </form>
-                                                        <a href="{{route('navedit',$subcategory->id)}}">
+                                                        <a href="{{route('category.edit',$subcategory->id)}}">
                                                             <button class="btn btn-default btn-rounded btn-sm"
                                                                     type="button"><i class="icon-trash"></i> ویرایش
                                                             </button>

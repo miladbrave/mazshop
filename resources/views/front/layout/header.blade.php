@@ -27,15 +27,26 @@
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ auth()->user()->fname . '  ' . auth()->user()->lname }} <span class="caret"></span>
+                                        {{ auth()->user()->fname . '  ' . auth()->user()->lname }} <span
+                                            class="caret"></span>
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: rgba(0,0,0,0.5)">
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                                         style="background-color: rgba(0,0,0,0.5)">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" style="padding-right: 6%;color: red">
+                                                     document.getElementById('logout-form').submit();"
+                                           style="padding-right: 6%;color: red">
                                             خروج
                                         </a>
+                                        <br>
+                                        <a href="" onclick="event.preventDefault();
+                                                     document.getElementById('profile').submit();"
+                                           style="padding-right: 6%;color: red">پروفایل</a>
+                                        <form method="post" id="profile"
+                                              action="{{route('profile',['name' => auth()->user()->id])}}">
+                                            @csrf
+                                        </form>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                               style="display: none;">
                                             @csrf

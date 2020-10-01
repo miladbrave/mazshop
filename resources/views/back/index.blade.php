@@ -129,19 +129,12 @@
                                 <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
                             </ul>
                         </div>
-                        <!-- panel body -->
                         <div class="panel-body">
                             <canvas id="myChart"></canvas>
                         </div>
+
                     </div>
                 </div>
-
-{{--                <div class="app">--}}
-{{--                    <center>--}}
-{{--                        {!! $chart->html() !!}--}}
-{{--                    </center>--}}
-{{--                </div>--}}
-
 
             </div>
             <footer class="animatedParent animateOnce z-index-10 fixed-bottom">
@@ -155,24 +148,83 @@
 
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-   <script>
-       var ctx = document.getElementById('myChart').getContext('2d');
-       var chart = new Chart(ctx, {
-           type: 'line',
-           data: {
-               labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
-               datasets: [{
-                   label: 'فروش کل',
-                   backgroundColor: 'rgba(240,240,240,0.01)',
-                   borderColor: 'rgb(255, 99, 132)',
-                   data: [0, 100, 5, 2, 20, 30, 405,5, 2, 20, 30, 405]
-               }]
-           },
-           options: {
-               hover: {
-                   mode: 'index'
-               }
-           }
-       });
-    </script>
+
 @endsection
+
+<script>
+    window.onload = function () {char();};
+    function char() {
+        $.ajax({
+            type: 'get', //post method
+            url: '/api/chart', //ajaxformexample url
+            dataType: "json",
+            success: function (result, textStatus, jqXHR)
+            {
+                console.log(result);
+                var data = [];
+                data.push(result.price);
+                console.log(data[0]);
+                labels = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+                renderChart(data[0], labels);
+            }
+        });
+        console.log(data);
+        // data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
+        // labels = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        // labels = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+        // renderChart(data, labels);
+    }
+    function renderChart(data, labels) {
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: 'rgba(249,0,94,0.35)',
+                    borderColor: 'rgb(249,8,0)',
+                    label: 'This week',
+                    data: data,
+                }]
+            },
+        });
+    }
+
+
+    // $.ajax({
+    //     type: 'get', //post method
+    //     url: '/api/chart', //ajaxformexample url
+    //     dataType: "json",
+    //     success: function (result, textStatus, jqXHR)
+    //     {
+    //         console.log(result);
+    //         var j = [];
+    //         for(var i=0 ; i < result.length ; i++){
+    //              j.push(result[i])
+    //         }
+    //         chart.data.datasets.forEach((dataset) => {
+    //             dataset.data.push(j);
+    //             console.log(dataset.data);
+    //         });
+    //     }
+    // });
+    // var ctx = document.getElementById('myChart').getContext('2d');
+    // var chart = new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+    //         datasets: [{
+    //             label: 'فروش کل',
+    //             backgroundColor: 'rgba(249,8,0,0.78)',
+    //             borderColor: 'rgb(255, 99, 132)',
+    //             data: [1],
+    //         }]
+    //     },
+    //     options: {
+    //         hover: {
+    //             mode: 'index'
+    //         }
+    //     }
+    // });
+
+</script>

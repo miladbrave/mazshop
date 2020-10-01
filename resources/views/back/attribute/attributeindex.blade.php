@@ -10,20 +10,20 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
+                                    <span class="fa fa-gear"></span>
                                     افزودن ویژگی جدید
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
                                 </h1>
-                                <form action="{{route('attributestore')}}" method="post">
+                                <form action="{{route('attribute.store')}}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                                 <label><span class="text-danger">*</span>نام ویژگی</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-paperclip"></i></span>
                                                     <input type="text" class="form-control" name="title" required
                                                            value="{{old('title')}}">
                                                 </div>
@@ -52,7 +52,7 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-users"></span>
+                                    <span class="fa fa-gears"></span>
                                     دسته بندی
                                     <hr>
                                 </h1>
@@ -77,17 +77,17 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <form method="post"
-                                                              action="{{route('attributedestroy',$attribute->id)}}"
+                                                              action="{{route('attribute.destroy',$attribute->id)}}"
                                                               style="display: inline">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-default btn-rounded btn-sm"
-                                                                    type="submit"><i class="icon-eye"></i> حذف
+                                                                    type="submit"><i class="icon-trash"></i> حذف
                                                             </button>
                                                         </form>
-                                                        <a href="{{route('attributeedit',$attribute->id)}}">
+                                                        <a href="{{route('attribute.edit',$attribute->id)}}">
                                                             <button class="btn btn-default btn-rounded btn-sm"
-                                                                    type="button"><i class="icon-trash"></i> ویرایش
+                                                                    type="button"><i class="icon-eye"></i> ویرایش
                                                             </button>
                                                         </a>
                                                     </td>

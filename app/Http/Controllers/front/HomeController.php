@@ -151,7 +151,6 @@ class HomeController extends Controller
         $cart = new cart($cart);
         $cart->addnumber($product, $product->id, $request->quantity);
         $request->session()->put('cart', $cart);
-
         return back();
     }
 
@@ -201,12 +200,22 @@ class HomeController extends Controller
         return Userlist::where('factor', $number)->exists();
     }
 
-    public function profile()
+    public function profile($name)
     {
         $navcategories = Category::where('type', 'null')->get();
         $maincategories = Category::where('type', '!=', 'null')->get();
         $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
-        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories'));
+        $user = User::where('id', $name)->first();
+        $userlists = Userlist::where('user_id', $user->id)->orderBy('created_at')->get();
+        foreach ($userlists->pluck('id') as $userlist){
+            $purchlist[] = Purchlist::whereIn('factor_number',[$userlist])->get()->pluck('product_id');
+        }
+        foreach ($purchlist as $purch){
+            $purchl[] = Product::with('photos')->whereIn('id',[$purch])->get();
+        }
+
+
+        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'user', 'userlists','purchl','purchlist'));
     }
 
     public function message(Request $request)
@@ -215,7 +224,7 @@ class HomeController extends Controller
             'g-recaptcha-response' => 'required|captcha',
             'email' => 'required|email',
             'description' => 'required',
-        ],[
+        ], [
             'g-recaptcha-response.required' => 'لطفا اعتبار سنجی کنید',
             'g-recaptcha-response.captcha' => 'مشکل در کپچرا.لطفا بعدا امتحان کنید.',
             'emai.required' => 'لطفا ایمیل خود را وارد کنید.',
@@ -238,7 +247,7 @@ class HomeController extends Controller
 
     public function messageApi()
     {
-        $message = Message::where('type','public')->latest('created_at');
+        $message = Message::where('type', 'public')->latest('created_at');
         return response()->json($message, 200);
     }
 

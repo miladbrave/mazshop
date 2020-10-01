@@ -21,7 +21,6 @@ class PayController extends Controller
     {
         $mount = Userlist::where('user_id', auth()->user()->id)->latest('created_at')->first();
         $total = $mount->totalprice + $mount->receiveprice;
-
         $invoice = (new Invoice)->amount((int)$total);
         $invoice->detail(['TestPay' => 'This is a test']);
         $payment = Payment::callbackUrl(route('paypack_callback'))->purchase($invoice);

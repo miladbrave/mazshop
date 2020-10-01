@@ -26,9 +26,10 @@ class adminController extends Controller
 //        $admin->
     }
 
-    public function show(Admin $admin)
+    public function show($user)
     {
-        //
+        $users = User::paginate(10);
+        return view('back.admin.user', compact('users'));
     }
 
     public function edit(Admin $admin)
@@ -41,14 +42,21 @@ class adminController extends Controller
         //
     }
 
-    public function destroy(Admin $admin)
+    public function destroy($email)
     {
-        //
+        $admin = Admin::where('email', $email)->first();
+        $user = User::where('email', $email)->first();
+        if($admin)
+            $admin->delete();
+
+        if ($user)
+            $user->delete();
+
+        return back();
     }
 
     public function usersIndex()
     {
-        $users = User::paginate(10);
-        return view('back.admin.user',compact('users'));
+
     }
 }

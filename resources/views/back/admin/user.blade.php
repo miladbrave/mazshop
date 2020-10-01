@@ -32,7 +32,7 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>
                                                     <form method="post"
-                                                          action="{{route('dashboard.admins.destroy',$admins->id)}}"
+                                                          action="{{route('admin.destroy',$user->email)}}"
                                                           style="display: inline">
                                                         @csrf
                                                         @method('delete')

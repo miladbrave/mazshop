@@ -10,13 +10,13 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
+                                    <span class="fa fa-file"></span>
                                     ویرایش دسته بندی
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
                                 </h1>
-                                <form action="{{route('navupdate',$category->id)}}" method="post">
+                                <form action="{{route('category.update',$category->id)}}" method="post">
                                     @csrf
                                     @method('PATCH')
                                     <div class="row">
@@ -24,12 +24,13 @@
                                             <div class="form-group @if($errors->has('faname')) has-error @endif">
                                                 <label><span class="text-danger">*</span>نام دسته بندی (نوار ابزار)</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-folder-open"></i></span>
                                                     <input type="text" class="form-control" name="title" required
                                                            value="{{$category->title}}">
                                                 </div>
                                             </div>
                                         </div>
+                                        <input name="type" type="hidden">
                                     </div>
                                     <hr>
                                     <button class="btn btn-success" type="submit">+ ثبت </button>

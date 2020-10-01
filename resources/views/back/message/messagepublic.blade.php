@@ -11,7 +11,6 @@
                             <h1 class="page-title">
                                 <span class="fa fa-envelope"></span>
                                 لیست پیام های عمومی
-
                                 <hr>
                             </h1>
                             <div class="panel-body wt-panel-body">
@@ -40,7 +39,7 @@
                                                             type="button"><i class="fa fa-envelope"></i> نمایش
                                                     </button>
                                                     <form method="post"
-                                                          action="{{route('messages.delete',['id'=> $message->id])}}"
+                                                          action="{{route('message.destroy',['message'=> $message->id])}}"
                                                           style="display: inline">
                                                         @csrf
                                                         @method('delete')

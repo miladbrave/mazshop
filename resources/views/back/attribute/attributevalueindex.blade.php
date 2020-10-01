@@ -10,13 +10,13 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
+                                    <span class="fa fa-gear"></span>
                                     افزودن ویژگی جدید
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
                                 </h1>
-                                <form action="{{route('attributesvaluestore')}}" method="post">
+                                <form action="{{route('attributeValue.index')}}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -75,17 +75,17 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <form method="post"
-                                                              action="{{route('destroyAttributeValue',$attributevalue->id)}}"
+                                                              action="{{route('attributeValue.destroy',$attributevalue->id)}}"
                                                               style="display: inline">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-default btn-rounded btn-sm"
-                                                                    type="submit"><i class="icon-eye"></i> حذف
+                                                                    type="submit"><i class="icon-trash"></i> حذف
                                                             </button>
                                                         </form>
-                                                        <a href="{{route('attributevalueedit',$attributevalue->id)}}">
+                                                        <a href="{{route('attributeValue.edit',$attributevalue->id)}}">
                                                             <button class="btn btn-default btn-rounded btn-sm"
-                                                                    type="button"><i class="icon-trash"></i> ویرایش
+                                                                    type="button"><i class="icon-eye"></i> ویرایش
                                                             </button>
                                                         </a>
                                                     </td>
