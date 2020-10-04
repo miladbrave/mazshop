@@ -42,7 +42,7 @@
                                                 <td>تاریخ پرداخت</td>
                                                 <td>
                                                     @if($pays->status == 'success')
-                                                        {{$pays->payment_date}}
+                                                        {{Verta::instance($pays->payment_date)}}
                                                     @endif
                                                 </td>
                                             </tr>

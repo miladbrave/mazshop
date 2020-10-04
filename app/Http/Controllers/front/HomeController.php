@@ -148,9 +148,13 @@ class HomeController extends Controller
     {
         $product = Product::with('photos')->findOrFail($id);
         $cart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new cart($cart);
-        $cart->addnumber($product, $product->id, $request->quantity);
-        $request->session()->put('cart', $cart);
+        if ($request->quantity < $product->count) {
+            $cart = new cart($cart);
+            $cart->addnumber($product, $product->id, $request->quantity);
+            $request->session()->put('cart', $cart);
+            return back();
+        }
+        Session::flash('mount', 'متاسفانه مقدار انتخابی برای این محصول بیش از تعداد موجود در انبار می باشد.');
         return back();
     }
 
@@ -200,49 +204,58 @@ class HomeController extends Controller
         return Userlist::where('factor', $number)->exists();
     }
 
-    public function profile($name)
+    public function profile()
     {
         $navcategories = Category::where('type', 'null')->get();
         $maincategories = Category::where('type', '!=', 'null')->get();
         $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
-        $user = User::where('id', $name)->first();
-        $userlists = Userlist::where('user_id', $user->id)->orderBy('created_at')->get();
-        foreach ($userlists->pluck('id') as $userlist){
-            $purchlist[] = Purchlist::whereIn('factor_number',[$userlist])->get()->pluck('product_id');
+        $userlists = Userlist::where('user_id', auth()->user()->id)->orderBy('created_at')->get();
+        foreach ($userlists->pluck('id') as $userlist) {
+            $purchlist[] = Purchlist::whereIn('factor_number', [$userlist])->get();
         }
-        foreach ($purchlist as $purch){
-            $purchl[] = Product::with('photos')->whereIn('id',[$purch])->get();
-        }
-
-
-        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'user', 'userlists','purchl','purchlist'));
+//        foreach ($purchlist as $purch) {
+//            foreach ($purch as $p) {
+//                $purchl[] = Product::with('photos')->whereIn('id', [$p->product_id])->get();
+//            }
+//        }
+        $purchl = Product::with('photos')->get();
+        $messages =Message::where('type','send')->get();
+        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'purchlist', 'userlists', 'purchl','messages'));
     }
 
     public function message(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'g-recaptcha-response' => 'required|captcha',
-            'email' => 'required|email',
-            'description' => 'required',
-        ], [
-            'g-recaptcha-response.required' => 'لطفا اعتبار سنجی کنید',
-            'g-recaptcha-response.captcha' => 'مشکل در کپچرا.لطفا بعدا امتحان کنید.',
-            'emai.required' => 'لطفا ایمیل خود را وارد کنید.',
-            'emai.email' => 'لطفا ایمیل معتبر وارد کنید.',
-            'description.required' => 'لطفا متن خود را وارد کنید.',
-        ]);
-        $validator->validate();
+        if (!$request->id) {
+            $validator = Validator::make($request->all(), [
+                'g-recaptcha-response' => 'required|captcha',
+                'email' => 'required|email',
+                'description' => 'required',
+            ], [
+                'g-recaptcha-response.required' => 'لطفا اعتبار سنجی کنید',
+                'g-recaptcha-response.captcha' => 'مشکل در کپچرا.لطفا بعدا امتحان کنید.',
+                'emai.required' => 'لطفا ایمیل خود را وارد کنید.',
+                'emai.email' => 'لطفا ایمیل معتبر وارد کنید.',
+                'description.required' => 'لطفا متن خود را وارد کنید.',
+            ]);
+            $validator->validate();
+        }
 
         $message = new Message();
         $message->name = $request->name;
         $message->email = $request->email;
         $message->description = $request->description;
         $message->type = "get";
-        $message->save();
+        if ($request->id)
+            $message->user_id = $request->id;
 
+        $message->save();
         Session::flash('message', ' با تشکر از شما، نظر شما ارسال شد.');
 
-        return back();
+        if (isset($request->id)) {
+            return redirect()->route('profile');
+        } else {
+            return back();
+        }
     }
 
     public function messageApi()

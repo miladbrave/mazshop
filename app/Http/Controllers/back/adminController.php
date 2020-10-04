@@ -6,24 +6,24 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
 {
     public function index()
     {
-        return view('back.admin.admin');
+        $admins = User::where('admin','admin')->get();
+        return view('back.admin.admin', compact('admins'));
     }
 
     public function create()
     {
-        return view('back.admin.create');
 
     }
 
     public function store(Request $request)
     {
-//        $admin = new Admin();
-//        $admin->
+
     }
 
     public function show($user)
@@ -32,31 +32,29 @@ class adminController extends Controller
         return view('back.admin.user', compact('users'));
     }
 
-    public function edit(Admin $admin)
+    public function edit($user)
     {
-        //
-    }
-
-    public function update(Request $request, Admin $admin)
-    {
-        //
-    }
-
-    public function destroy($email)
-    {
-        $admin = Admin::where('email', $email)->first();
-        $user = User::where('email', $email)->first();
-        if($admin)
-            $admin->delete();
-
-        if ($user)
-            $user->delete();
-
+        $user = User::findOrFail($user);
+        $user->admin = "admin";
+        $user->save();
         return back();
     }
 
-    public function usersIndex()
+    public function update(Request $request, $user)
     {
 
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if($user->admin == "user")
+            $user->delete();
+
+        if ($user->admin == "admin")
+            $user->admin = "user";
+            $user->save();
+
+        return back();
     }
 }

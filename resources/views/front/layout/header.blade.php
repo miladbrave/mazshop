@@ -42,10 +42,19 @@
                                         <br>
                                         <a href="" onclick="event.preventDefault();
                                                      document.getElementById('profile').submit();"
-                                           style="padding-right: 6%;color: red">پروفایل</a>
-                                        <form method="post" id="profile"
-                                              action="{{route('profile',['name' => auth()->user()->id])}}">
-                                            @csrf
+                                           style="padding-right: 6%;color: red">پروفایل</a><br>
+
+                                        @if(auth()->user()->admin == "admin")
+                                            <a href="" onclick="event.preventDefault();
+                                                     document.getElementById('dashboard').submit();"
+                                               style="padding-right: 6%;color: red">پنل مدیریت</a>
+                                        @endif
+
+                                        <form method="get" id="dashboard"
+                                              action="{{route('administrator')}}">
+                                        </form>
+                                        <form method="get" id="profile"
+                                              action="{{route('profile')}}">
                                         </form>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                               style="display: none;">
@@ -200,6 +209,7 @@
                             </div>
                         </li>
 
+                        <li class="information-link"><a href="">دانلود ها</a></li>
                         <li class="information-link"><a href="{{route('fag')}}">سوالات شما</a></li>
                         <li class="information-link"><a href="{{route('about')}}">درباره ما</a></li>
                         <li class="information-link"><a href="{{route('contact')}}">تماس با ما</a></li>

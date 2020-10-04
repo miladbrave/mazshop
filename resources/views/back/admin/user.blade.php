@@ -37,9 +37,19 @@
                                                         @csrf
                                                         @method('delete')
                                                         <button class="btn btn-default btn-rounded btn-sm"
-                                                                type="submit"><i class="icon-eye"></i> حذف
+                                                                type="submit"><i class="icon-trash"></i> حذف
                                                         </button>
                                                     </form>
+                                                    @if($user->admin == 'user')
+                                                        <a href="{{route('admin.edit',['admin' => $user->id])}}">
+                                                            <button class="btn btn-default btn-rounded btn-sm"
+                                                                    type="button"><i class="fa fa-gear"></i>ادمین
+                                                            </button>
+                                                        </a>
+                                                    @elseif($user->admin == 'admin')
+                                                        <span class="badge badge-pill badge-danger" style="margin-right: 2%">Admin</span>
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach

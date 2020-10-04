@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('province')->nullable();
             $table->string('postcode')->nullable();
+            $table->string('admin',20)->nullable()->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

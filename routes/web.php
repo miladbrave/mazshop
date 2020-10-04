@@ -13,12 +13,11 @@ Route::get('/checkout', 'front\HomeController@checkout')->name('checkout');
 Route::get('/contact', 'front\HomeController@contact')->name('contact');
 Route::get('/fag', 'front\HomeController@fag')->name('fag');
 Route::get('/product/{slug}', 'front\HomeController@product')->name('product.self');
-Route::get('/search', 'front\HomeController@search');
 Route::get('add_cart/{id}','front\HomeController@addcart')->name('add.cart');
 Route::get('removeproduct/{id}','front\HomeController@removeproduct')->name('remove.product');
 Route::get('addqty/{id}','front\HomeController@addqty')->name('add.qty');
 Route::patch('updateUser','front\HomeController@updateuser')->name('updateuser');
-Route::post('profile/{name}','front\HomeController@profile')->name('profile');
+Route::get('/profile','front\HomeController@profile')->name('profile');
 Route::post('messages/{id?}','front\HomeController@message')->name('contact.messages');
 Route::get('payStatus','front\PayController@payStatus')->name('payStatus');
 Route::get('pay','front\PayController@pay')->name('pay');
@@ -26,10 +25,9 @@ Route::any('paypack_callback','front\PayController@paypack_callback')->name('pay
 
 
 
-
-Route::group(['prefix'=>'administrator'], function () {
+Route::group(['prefix'=>'administrator','middleware'=>'admin'], function () {
     Route::get('/', 'back\dashboardController@index')->name('administrator');
-    Route::resource('/admin', 'back\adminController');
+    Route::resource('admin', 'back\adminController');
     Route::resource('/product', 'back\productController');
     Route::resource('brand','back\brandsController');
     Route::resource('slider','back\sliderController');

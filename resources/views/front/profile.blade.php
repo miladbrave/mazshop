@@ -21,13 +21,25 @@
                                     ارسال پیام</a></li>
                             <li><a data-toggle="pill" href="#adventures"><img src="{{asset('/front/img/Plan.png')}}">پیام
                                     ها</a></li>
-                            <li><a data-toggle="pill" href=""><img src="{{asset('/front/img/Exit.png')}}">
+                            <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><img
+                                        src="{{asset('/front/img/Exit.png')}}">
                                     خروج</a></li>
                         </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-9 col-xs-12">
                     <div class="tab-content n-left">
+                        @if(Session::has('message'))
+                            <div class="alert alert-success container" style="width: 100%">
+                                <div>{{ Session('message') }}</div>
+                            </div>
+                        @endif
+
                         <div id="about" class="tab-pane fade in active">
                             <h2>اطلاعات کاربر</h2>
                             <p><span><i class="fa fa-user-circle"></i><strong>نام و نام خانوادگی :</strong>
@@ -56,7 +68,25 @@
                         </div>
                         <div id="adventures" class="tab-pane fade">
                             <h2>پیام ها</h2>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center col-md-2" scope="col">نام</th>
+                                    <th class="text-center col-md-8" scope="col">توضیح</th>
+                                    <th class="text-center col-md-2" scope="col">تاریخ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($messages->where('user_id',auth()->user()->id) as $message)
+                                    <tr>
+                                        <td class="text-center col-md-2">{{$message->name}}</td>
+                                        <td class="text-center col-md-8">{{$message->description}}</td>
+                                        <td class="text-center col-md-2">{{Verta::instance($message->created_at)}}</td>
 
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                         <div id="subset" class="tab-pane fade">
                             <h2>سوابق خرید</h2>
@@ -79,7 +109,7 @@
                                         <td class="text-center">{{$userlist->totalprice}}</td>
                                         <td class="text-center">{{$userlist->receiveprice}}</td>
                                         <td class="text-center">{{$userlist->status}}</td>
-                                        <td class="text-center">{{$userlist->created_at}}</td>
+                                        <td class="text-center">{{Verta::instance($userlist->created_at)->format('%B %d، %Y')}}</td>
                                         <td class="text-center">
                                             <button class="btn btn-default btn-rounded btn-sm"
                                                     data-toggle="modal" data-target="#{{$userlist['id']}}"
@@ -92,34 +122,44 @@
                             </table>
                         </div>
                         <div id="contact" class="tab-pane fade">
-                            <h2>ارتباط با پشتیبان سایت</h2>
+                            <h2>ارتباط با مدیریت سایت</h2>
                             <div class="card card-signup">
-                                <form class="form" method="" action="">
-                                    <div class="content">
-                                        <div class="input-group">
+                                <form action="{{route('contact.messages',['id' => auth()->user()->id])}}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="form-group col-md-8">
+                                            <div class="input-group">
     											 <span class="input-group-addon">
-    												<i class="fa fa-user-circle"></i>نام
+    												<i class="fa fa-user-circle"></i>موضوع
     											 </span>
-                                            <input type="text" class="form-control"
-                                                   placeholder="نام و نام خانوادگی">
+                                                <input type="text" class="form-control" name="name"
+                                                       placeholder="موضوع">
+                                            </div>
                                         </div>
-                                        <div class="input-group">
+                                        <div class="form-group col-md-8">
+                                            <div class="input-group">
     											<span class="input-group-addon">
     											  <i class="fa fa-envelope"></i>پست الکترونیک
     											</span>
-                                            <input type="text" class="form-control" placeholder="پست الکترونیک">
+                                                <input type="text" class="form-control" name="email"
+                                                       value="{{auth()->user()->email}}" disabled>
+                                            </div>
                                         </div>
-                                        <div class="input-group">
+                                        <div class="form-group col-md-8">
+                                            <div class="input-group">
     											<span class="input-group-addon">
     											  <i class="fa fa-pencil"></i>متن پیام
     											</span>
-                                            <textarea placeholder="متن پیام ..." class="form-control"
-                                                      rows="3"></textarea>
+                                                <textarea placeholder="متن پیام ..." name="description"
+                                                          class="form-control" required
+                                                          rows="3"></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="footer text-center">
-                                        <a href="#" class="btn btn-simple btn-success btn-lg text-blue">ارسال
-                                            پیام</a>
+                                    <div class="buttons">
+                                        <div class="pull-right">
+                                            <input class="btn btn-primary" type="submit" value="ارسال"/>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -140,9 +180,21 @@
                         <h5 class="modal-title" id="{{$userlist['id']}}">{{$userlist->fname}}</h5>
                     </div>
                     <div class="modal-body">
-                        @foreach($purchl as $purch)
-                            {{$purch->first()->name}}
-                        @endforeach
+                        <div class="row">
+                            @foreach($purchlist as $purch)
+                                @foreach($purch->where('factor_number',$userlist->id) as $pur)
+                                    @foreach($purchl->where('id',$pur->product_id) as $p)
+                                        <div class="col-md-3">
+                                            <img src="{{asset($p->photos->first()->path)}}" alt="" width="100%"
+                                                 height="100px">
+                                            {{$p->name}}<br>
+                                            <span class="text-danger">{{$p->price}} تومان</span><br>
+                                            تعداد : {{$pur->count}}
+                                        </div>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">بستن</button>

@@ -7,6 +7,11 @@
                 <div id="content" class="col-sm-12">
                     <h1 class="title">سبد خرید</h1>
                     <div class="table-responsive">
+                        @if(Session::has('mount'))
+                            <div class="alert alert-danger container" style="width: 100%">
+                                <div>{{ Session('mount') }}</div>
+                            </div>
+                        @endif
                         <table class="table table-bordered">
                             <thead>
                             <tr>

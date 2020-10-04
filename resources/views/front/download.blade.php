@@ -47,11 +47,7 @@
 
                 <ul class="breadcrumb">
                     <li><a href="{{route('home')}}"><i class="fa fa-home "></i></a></li>
-                    @foreach($navcategories as $nav)
-                        @foreach($maincategories as $main)
-                            <li><a href="{{route('category',['id'=>$main->title])}}">{{$main->title}}</a></li>
-                        @endforeach
-                    @endforeach
+                    <li><a href=""></a></li>
                 </ul>
 
                 <div id="content" class="col-sm-9">
@@ -69,12 +65,9 @@
                             <div class="col-md-10">
                                 <div class="text-right">
                                     <label for="exampleFormControlSelect1">دسته بندی :</label>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 1 ])}}" class="badge"
-                                       style="margin-right:5%;background-color: #00d0ff">افزایش قیمت</a>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 2 ])}}" class="badge"
-                                       style="margin-right:4%;background-color: #00d0ff">کاهش قیمت</a>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 3 ])}}" class="badge"
-                                       style="margin-right:4%;background-color: #00d0ff">موجود</a>
+                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 1 ])}}" class="badge" style="margin-right:5%;background-color: #00d0ff">افزایش قیمت</a>
+                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 2 ])}}" class="badge" style="margin-right:4%;background-color: #00d0ff">کاهش قیمت</a>
+                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 3 ])}}" class="badge" style="margin-right:4%;background-color: #00d0ff">موجود</a>
                                 </div>
                             </div>
                         </div>
@@ -91,9 +84,7 @@
                                                     class="img-responsive"/></a></div>
                                         <div>
                                             <div class="caption">
-                                                <h3>
-                                                    <a href="{{route('product.self',$product->slug)}}"> {{$product->name}} </a>
-                                                </h3>
+                                                <h3><a href="{{route('product.self',$product->slug)}}"> {{$product->name}} </a></h3>
                                                 <p>{!! Str::limit($product->description,150) !!}</p>
                                                 @if($product->exist == 1)
                                                     @if($product->discount)
