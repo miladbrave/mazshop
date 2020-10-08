@@ -21,6 +21,8 @@ class CreatePayTable extends Migration
             $table->string('status')->nullable()->default(null);
             $table->string('payment_date')->nullable()->default(null);
             $table->string('order_id')->nullable()->default(null);
+            $table->string('name')->nullable()->default(null);
+            $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
     }

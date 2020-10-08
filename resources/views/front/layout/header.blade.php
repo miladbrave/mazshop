@@ -79,22 +79,37 @@
                                             <tr>
                                                 <td class="text-left" style="width: 30%;">
                                                     <a href="#">
-                                                        <img class="img-thumbnail"
-                                                             title="{{$product['item']->name}}"
-                                                             alt="{{$product['item']->name}}"
-                                                             src="{{asset($product['item']->photos()->first()->path)}}"
-                                                        >
+                                                        @if(isset($product['item']->photos))
+                                                            <img class="img-thumbnail"
+                                                                 title="{{$product['item']->name}}"
+                                                                 alt="{{$product['item']->name}}"
+                                                                 src="{{asset($product['item']->photos()->first()->path)}}"
+                                                            >
+                                                        @else
+                                                            <img class="img-thumbnail"
+                                                                 title="{{$product['item']->name}}"
+                                                                 alt="{{$product['item']->name}}"
+                                                                 src="{{asset('/front/img/download.png')}}"
+                                                            >
+                                                        @endif
                                                     </a>
                                                 </td>
-                                                <td class="text-left"><a style="color: red"
-                                                                         href="{{route('product.self',['slug'=>$product['item']->slug])}}">{{$product['item']->name}}</a>
+                                                <td class="text-left">
+                                                    @if(isset($product['item']->slug))
+                                                        <a style="color: red"
+                                                           href="{{route('product.self',['slug'=>$product['item']->slug])}}">{{$product['item']->name}}</a>
+                                                    @else
+                                                        <a style="color: red"
+                                                           href="{{route('downloads')}}">{{$product['item']->title}}</a>
+                                                    @endif
                                                 </td>
                                                 <td class="text-right">{{$product['qty']}}عدد</td>
                                                 <td class="text-right">{{$product['price']}} تومان</td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-danger btn-xs remove" title="حذف" onClick=""
-                                                            type="button"><i class="fa fa-times"></i></button>
-                                                </td>
+{{--                                                <td class="text-center">--}}
+{{--                                                    <a href="{{route('remove.product',['id' => $product['item']])}}"--}}
+{{--                                                       class="btn btn-danger btn-xs remove" title="حذف"--}}
+{{--                                                       type="button"><i class="fa fa-times"></i></a>--}}
+{{--                                                </td>--}}
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -209,7 +224,7 @@
                             </div>
                         </li>
 
-                        <li class="information-link"><a href="">دانلود ها</a></li>
+                        <li class="information-link"><a href="{{route('downloads')}}">دانلود ها</a></li>
                         <li class="information-link"><a href="{{route('fag')}}">سوالات شما</a></li>
                         <li class="information-link"><a href="{{route('about')}}">درباره ما</a></li>
                         <li class="information-link"><a href="{{route('contact')}}">تماس با ما</a></li>

@@ -22,7 +22,9 @@ class CreateProductsTable extends Migration
             $table->bigInteger('discount');
             $table->bigInteger('sku');
             $table->bigInteger('brand_id');
-            $table->tinyInteger('user_id'); //should created
+            $table->bigInteger('count');
+            $table->string('exist',10);
+            $table->tinyInteger('user_id');
             $table->string('type');
             $table->string('distribute',20);
             $table->text('description');

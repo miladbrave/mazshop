@@ -10,8 +10,8 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
-                                    افزودن محصول جدید
+                                    <span class="fa fa-picture-o"></span>
+                                    ویرایش ویدیو
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
@@ -24,7 +24,7 @@
                                             <div class="form-group @if($errors->has('link')) has-error @endif">
                                                 <label><span class="text-danger">*</span>لینک تبلیغات</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                                                     <input type="text" class="form-control" name="link" required
                                                            value="{{$ad->link}}">
                                                 </div>
@@ -34,7 +34,7 @@
                                             <div class="form-group @if($errors->has('link')) has-error @endif">
                                                 <label><span class="text-danger">*</span>متن تبلیغات</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                                                     <input type="text" class="form-control" name="title" required
                                                            value="{{$ad->title}}">
                                                 </div>

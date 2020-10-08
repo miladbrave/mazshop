@@ -37,21 +37,24 @@
                     <hr>
                     <div class="banner owl-carousel">
                         <div class="item"><a href="#"><img
-                                    src="{{asset('/front/image/banner/small-banner1-265x350.jpg')}}" alt="small banner"
+                                    src="{{asset('/front/img/b1.jpg')}}" alt="small banner"
                                     class="img-responsive"/></a></div>
                         <div class="item"><a href="#"><img
-                                    src="{{asset('/front/image/banner/small-banner-265x350.jpg')}}" alt="small banner1"
+                                    src="{{asset('/front/img/b2.jpg')}}" alt="small banner1"
                                     class="img-responsive"/></a></div>
                     </div>
                 </aside>
 
                 <ul class="breadcrumb">
                     <li><a href="{{route('home')}}"><i class="fa fa-home "></i></a></li>
-                    @foreach($navcategories as $nav)
-                        @foreach($maincategories as $main)
-                            <li><a href="{{route('category',['id'=>$main->title])}}">{{$main->title}}</a></li>
-                        @endforeach
-                    @endforeach
+                    @if($title->type !== "null" && !is_numeric($title->type))
+                        <li><a href="{{route('category',['id'=>$title->type])}}">{{$title->type}}</a></li>
+                    @elseif($title->type !== "null" && is_numeric($title->type))
+                        <li>
+                            <a href="{{route('category',['id'=>$title->where('id',$title->type)->first()->title])}}">{{$title->where('id',$title->type)->first()->title}}</a>
+                        </li>
+                    @endif
+                    <li><a href="{{route('category',['id'=>$title->title])}}">{{$title->title}}</a></li>
                 </ul>
 
                 <div id="content" class="col-sm-9">

@@ -51,10 +51,10 @@
             </ul>
         </li>
         <li class="has-sub">
-            <a href="collapsed-sidebar.html"><i class="fa fa-book"></i><span class="title">تبلیغات( بنر دوم )</span></a>
+            <a href="collapsed-sidebar.html"><i class="fa fa-book"></i><span class="title">ویدیو ( بنر دوم )</span></a>
             <ul class="nav collapse">
-                <li><a href="{{route('ads.create')}}"><span class="title">ایجاد تبلیغات</span></a></li>
-                <li><a href="{{route('ads.index')}}"><span class="title">لیست تبلیغات </span></a></li>
+                <li><a href="{{route('ads.create')}}"><span class="title">ایجاد ویدیو</span></a></li>
+                <li><a href="{{route('ads.index')}}"><span class="title">لیست ویدیو </span></a></li>
             </ul>
         </li>
         <li class="has-sub">
@@ -62,6 +62,18 @@
             <ul class="nav collapse">
                 <li><a href="{{route('message.index')}}"><span class="title">پیام های دریافتی</span></a></li>
                 <li><a href="{{route('message.show',"send")}}"><span class="title">ارسال پیام</span></a></li>
+            </ul>
+        </li>
+        <li class="has-sub">
+            <a href="collapsed-sidebar.html"><i class="fa fa-download"></i><span class="title">دانلود ها</span></a>
+            <ul class="nav collapse">
+                <li><a href="{{route('download.index')}}"><span class="title">لیست فایل های دانلودی</span></a></li>
+            </ul>
+        </li>
+        <li class="has-sub">
+            <a href="collapsed-sidebar.html"><i class="fa fa-percent"></i><span class="title">کوپن تخفیف</span></a>
+            <ul class="nav collapse">
+                <li><a href=""><span class="title">لیست کوپن ها</span></a></li>
             </ul>
         </li>
     </ul>

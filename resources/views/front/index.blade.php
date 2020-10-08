@@ -318,7 +318,7 @@
                 <div class="marketshop-banner2">
                     <div class="row">
                         @foreach($ads as $ad)
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="ad"><a href="{{$ad->link}}"><img
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="ad"><a href="{{route('video',["id" => $ad->title])}}"><img
                                         src="{{asset($ad->photo()->first()->path)}}"
                                         alt="{{$ad->title}}"/></a>
                                 <div class="overlay2">{{$ad->title}}</div>

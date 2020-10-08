@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/front/css/responsive-rtl.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/front/css/stylesheet-skin2.css')}}">
 
+
 </head>
 <body>
 <div class="wrapper-wide">

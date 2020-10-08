@@ -37,91 +37,48 @@
                     <hr>
                     <div class="banner owl-carousel">
                         <div class="item"><a href="#"><img
-                                    src="{{asset('/front/image/banner/small-banner1-265x350.jpg')}}" alt="small banner"
+                                    src="{{asset('/front/img/b1.jpg')}}" alt="small banner"
                                     class="img-responsive"/></a></div>
                         <div class="item"><a href="#"><img
-                                    src="{{asset('/front/image/banner/small-banner-265x350.jpg')}}" alt="small banner1"
+                                    src="{{asset('/front/img/b2.jpg')}}" alt="small banner1"
                                     class="img-responsive"/></a></div>
                     </div>
                 </aside>
 
-                <ul class="breadcrumb">
-                    <li><a href="{{route('home')}}"><i class="fa fa-home "></i></a></li>
-                    <li><a href=""></a></li>
-                </ul>
-
                 <div id="content" class="col-sm-9">
-                    <h1 class="title">{{$title->title}}</h1>
-                    <div class="product-filter">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-5">
-                                <div class="btn-group">
-                                    <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip"
-                                            title="List"><i class="fa fa-th-list"></i></button>
-                                    <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip"
-                                            title="Grid"><i class="fa fa-th"></i></button>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="text-right">
-                                    <label for="exampleFormControlSelect1">دسته بندی :</label>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 1 ])}}" class="badge" style="margin-right:5%;background-color: #00d0ff">افزایش قیمت</a>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 2 ])}}" class="badge" style="margin-right:4%;background-color: #00d0ff">کاهش قیمت</a>
-                                    <a href="{{route('category',['id'=>$title->title ,'sort' => 3 ])}}" class="badge" style="margin-right:4%;background-color: #00d0ff">موجود</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
+                    <h1 class="title">دانلود ها</h1>
+                    <hr>
                     <div class="row products-category">
-                        @if($products)
-                            @foreach($products as $product)
+                        @if($downloads)
+                            @foreach($downloads as $download)
                                 <div class="product-layout product-list col-xs-12">
                                     <div class="product-thumb">
-                                        <div class="image"><a href="{{route('product.self',$product->slug)}}"><img
-                                                    src="{{asset($product->photos()->first()->path)}}"
-                                                    alt="{{$product->name}}" title="{{$product->name}}"
+                                        <div class="image"><a href="{{route('product.self',$download->title)}}"><img
+                                                    src="{{asset('/front/img/download.png')}}" width="80%"
+                                                    alt="{{$download->title}}" title="{{$download->title}}"
                                                     class="img-responsive"/></a></div>
                                         <div>
                                             <div class="caption">
-                                                <h3><a href="{{route('product.self',$product->slug)}}"> {{$product->name}} </a></h3>
-                                                <p>{!! Str::limit($product->description,150) !!}</p>
-                                                @if($product->exist == 1)
-                                                    @if($product->discount)
-                                                        <p class="price">
-                                                            <span class="price-new">{{\App\Helpers\Helpers::discount($product->price,$product->discount)}} تومان</span><br>
-                                                            <span
-                                                                class="price-old">{{$product->price}} تومان</span>
-                                                            <span
-                                                                class="saving">-{{$product->discount}}%</span>
-                                                        </p>
-                                                    @else
-                                                        <p class="price">
-                                                            <span class="price-new">{{\App\Helpers\Helpers::discount($product->price,$product->discount)}} تومان</span>
-                                                        </p>
-                                                    @endif
-                                                @elseif($product->exist == 2)
-                                                    <h4 style="padding-bottom: 15%;font-weight: bold;color: red">موجود
-                                                        نمی
-                                                        باشد.</h4>
-                                                @endif
-                                                @if($product->exist == 1)
-                                                    <div class="button-group pull-right">
-                                                        <h5 class="text-info"> در انبار {{$product->count}} عدد</h5>
-                                                    </div>
-                                                    <div class="button-group pull-left">
-                                                        <a class="btn-primary"
-                                                           href="{{route('add.cart',['id'=>$product->id])}}"><span>افزودن به سبد</span>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                <h3><a href="{{route('product.self',$download->title)}}"> {{$download->title}} </a></h3>
+                                                <p>{!! Str::limit($download->description,150) !!}</p>
+
+                                                <p class="price">
+                                                    <span class="price-new">{{$download->price}} تومان</span><br>
+                                                </p>
+
+                                                <div class="button-group pull-left">
+                                                    <a class="btn-primary"
+                                                       href="{{route('add.cart.download',['id'=>$download->id])}}"><span>افزودن به سبد</span>
+                                                    </a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         @endif
-                        @if(!isset($product))
+                        @if(!isset($download))
                             <h2 class="text-danger">متاسفانه محصولی یافت نشد!</h2>
                         @endif
                     </div>

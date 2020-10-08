@@ -5,7 +5,7 @@
     <div class="pro">
         <div class="">
             <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12" style="width: 22%">
+                <div class="col-md-3 col-sm-9 col-xs-12" style="width: 22%">
                     <div class="n-top"><img src="{{asset('/front/img/avatar.jpg')}}">
                         <h4>{{auth()->user()->fname}} {{auth()->user()->lname}}</h4>
                     </div>
@@ -192,8 +192,24 @@
                                             تعداد : {{$pur->count}}
                                         </div>
                                     @endforeach
+                                    @foreach($downloads as $download)
+                                        @if("download".$download->id == $pur->product_id)
+                                            <div class="col-md-3">
+                                                <img src="{{asset('/front/img/download.png')}}" alt="" width="100%"
+                                                     height="100px">
+                                                <strong>{{$download->title}}</strong><br><br>
+                                                <a
+                                                    href="{{route('download.show',['download' => $download->id])}}"
+                                                    class="badge badge-pill"
+                                                    style="background-color: green;font-size:15px;">
+                                                    دانلود
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 @endforeach
                             @endforeach
+
                         </div>
                     </div>
                     <div class="modal-footer">

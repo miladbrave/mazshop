@@ -40,9 +40,9 @@ return [
             'apiPurchaseUrl' => 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl',
             'apiPaymentUrl' => 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat',
             'apiVerificationUrl' => 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl',
-            'terminalId' => '۱۰۷۶۳۷۴',
-            'username' => 'abcuser',
-            'password' => '۱۲۵۸۹۰',
+            'terminalId' => '1639359',
+            'username' => 'tabr65',
+            'password' => '31680788',
             'callbackUrl' => 'http://127.0.0.1:8000/',
             'description' => 'payment using behpardakht',
         ],
@@ -188,7 +188,7 @@ return [
             'mode' => 'sandbox', // can be normal, sandbox, zaringate
             'merchantId' => '11111111-1111-1111-1111-111111111111',
             'callbackUrl' => 'http://yoursite.com/path/to',
-            'description' => 'payment using MILAD',
+            'description' => 'MIL@D',
         ],
         'zibal' => [
             /* normal api */

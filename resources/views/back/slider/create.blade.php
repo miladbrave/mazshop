@@ -10,8 +10,8 @@
                         <div class="panel panel-default animated fadeInUp">
                             <div class="panel-body min-height-100">
                                 <h1 class="page-title">
-                                    <span class="icon-user-add"></span>
-                                    افزودن محصول جدید
+                                    <span class="fa fa-sliders"></span>
+                                    افزودن اسلاید جدید
                                     <a href="{{url()->previous()}}" class="btn btn-default btn-rounded pull-right mob"
                                        type="button"> بازگشت <span class="icon-left-open"></span></a>
                                     <hr>
@@ -21,10 +21,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group @if($errors->has('link')) has-error @endif">
-                                                <label><span class="text-danger">*</span>لینک اسلایدر</label>
+                                                <label>لینک اسلایدر</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
-                                                    <input type="text" class="form-control" name="link" required
+                                                    <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                                    <input type="text" class="form-control" name="link"
                                                            value="{{old('link')}}">
                                                 </div>
                                             </div>

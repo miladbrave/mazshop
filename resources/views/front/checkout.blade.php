@@ -61,7 +61,8 @@
                                                         <label for="input-payment-city"
                                                                class="control-label">استان</label>
                                                         <input type="text" class="form-control" id="input-payment-city"
-                                                               placeholder="استان" value="{{$user->province}}" name="province">
+                                                               placeholder="استان" value="{{$user->province}}"
+                                                               name="province">
                                                     </div>
                                                     <div class="form-group required col-md-4">
                                                         <label for="input-payment-city"
@@ -74,14 +75,16 @@
                                                             پستی</label>
                                                         <input type="text" class="form-control"
                                                                id="input-payment-postcode"
-                                                               placeholder="کد پستی" value="{{$user->postcode}}" name="postcode">
+                                                               placeholder="کد پستی" value="{{$user->postcode}}"
+                                                               name="postcode">
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label for="input-payment-address-1" class="control-label">آدرس
                                                         </label>
                                                         <input type="text" class="form-control"
                                                                id="input-payment-address-1"
-                                                               placeholder="آدرس 1" value="{{$user->address}}" name="address">
+                                                               placeholder="آدرس 1" value="{{$user->address}}"
+                                                               name="address">
                                                     </div>
                                                     <small class="text-danger"> لطفا جاهای خالی را با دقت پر کنید.عواقب
                                                         هر
@@ -164,15 +167,38 @@
                                                         @if($cart)
                                                             @foreach($cart->items as $product)
                                                                 <tr>
-                                                                    <td class="text-center" width="15%"><a
-                                                                            href="{{route('product.self',['slug' => $product['item']->slug])}}"><img
-                                                                                src="{{asset($product['item']->photos()->first()->path)}}"
-                                                                                alt="{{$product['item']->name}}"
-                                                                                title="{{$product['item']->name}}"
-                                                                                class="img-thumbnail"/></a></td>
-                                                                    <td class="text-left"><a
-                                                                            href="{{route('product.self',['slug' => $product['item']->slug])}}">
-                                                                            {{$product['item']->name}}</a><br/>
+                                                                    <td class="text-center" width="15%">
+                                                                        @if(isset($product['item']->slug))
+                                                                            <a
+                                                                                href="{{route('product.self',['slug' => $product['item']->slug])}}"><img
+                                                                                    src="{{asset($product['item']->photos()->first()->path)}}"
+                                                                                    alt="{{$product['item']->name}}"
+                                                                                    title="{{$product['item']->name}}"
+                                                                                    class="img-thumbnail"/>
+                                                                            </a>
+                                                                        @else
+                                                                            <a
+                                                                                href="{{route('downloads')}}"><img
+                                                                                    src="{{asset('/front/img/download.png')}}"
+                                                                                    alt="{{$product['item']->name}}"
+                                                                                    title="{{$product['item']->name}}"
+                                                                                    class="img-thumbnail"/>
+                                                                            </a>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td class="text-left">
+                                                                        @if(isset($product['item']->slug))
+                                                                            <a
+                                                                                href="{{route('product.self',['slug' => $product['item']->slug])}}">
+                                                                                {{$product['item']->name}}
+                                                                            </a>
+                                                                        @else
+                                                                            <a
+                                                                                href="{{route('downloads')}}">
+                                                                                {{$product['item']->title}}
+                                                                            </a>
+                                                                        @endif
+                                                                        <br/>
                                                                     </td>
                                                                     <td class="text-center">
                                                                         <div class="input-group btn-block"

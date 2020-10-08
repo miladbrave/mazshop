@@ -5,6 +5,8 @@ namespace App\Http\Controllers\front;
 use App\Ad;
 use App\Banner;
 use App\Category;
+use App\Directpay;
+use App\Download;
 use App\Helpers\cart;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -133,6 +135,16 @@ class HomeController extends Controller
         return back();
     }
 
+    public function addcartdownload(Request $request, $id)
+    {
+        $product = Download::findOrFail($id);
+        $oldcart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new  cart($oldcart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        return back();
+    }
+
     public function removeproduct(Request $request, $id)
     {
         $product = Product::with('photos')->findOrFail($id);
@@ -143,6 +155,18 @@ class HomeController extends Controller
         unset($cart->items[$id]);
         return back();
     }
+
+    public function removedownload(Request $request, $id)
+    {
+        $product = Download::findOrFail($id);
+        $cart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new cart($cart);
+        $cart->remove($product, $product->id);
+        $request->session()->put('cart', $cart);
+        unset($cart->items[$id]);
+        return back();
+    }
+
 
     public function addqty(Request $request, $id)
     {
@@ -178,11 +202,20 @@ class HomeController extends Controller
         $userlist->save();
 
         foreach (Session::get('cart')->items as $person) {
-            $purchlist = Purchlist::create([
-                'product_id' => $person['item']->id,
-                'count' => $person['qty'],
-                'price' => $person['price'],
-            ]);
+            if (isset($person['item']->slug)) {
+                $purchlist = Purchlist::create([
+                    'product_id' => $person['item']->id,
+                    'count' => $person['qty'],
+                    'price' => $person['price'],
+                ]);
+            } else {
+                $purchlist = Purchlist::create([
+                    'product_id' => "download" . $person['item']->id,
+                    'count' => $person['qty'],
+                    'price' => $person['price'],
+                ]);
+            }
+
             $purchlist->factor_number = $userlist->id;
             $purchlist->save();
         }
@@ -209,18 +242,20 @@ class HomeController extends Controller
         $navcategories = Category::where('type', 'null')->get();
         $maincategories = Category::where('type', '!=', 'null')->get();
         $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
-        $userlists = Userlist::where('user_id', auth()->user()->id)->orderBy('created_at')->get();
+        $userlists = Userlist::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         foreach ($userlists->pluck('id') as $userlist) {
             $purchlist[] = Purchlist::whereIn('factor_number', [$userlist])->get();
         }
-//        foreach ($purchlist as $purch) {
+//        foreach ($purchlist->product_id as $purch) {
 //            foreach ($purch as $p) {
-//                $purchl[] = Product::with('photos')->whereIn('id', [$p->product_id])->get();
+//                $purchdownload[] = Download::where('id', 'like',  '%' . $p->product_id .'%')->get();
 //            }
 //        }
+
         $purchl = Product::with('photos')->get();
-        $messages =Message::where('type','send')->get();
-        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'purchlist', 'userlists', 'purchl','messages'));
+        $messages = Message::where('type', 'send')->get();
+        $downloads = Download::all();
+        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'purchlist', 'userlists', 'purchl', 'messages', 'downloads'));
     }
 
     public function message(Request $request)
@@ -242,9 +277,16 @@ class HomeController extends Controller
 
         $message = new Message();
         $message->name = $request->name;
-        $message->email = $request->email;
         $message->description = $request->description;
         $message->type = "get";
+
+        if (!$request->id) {
+            $message->email = $request->email;
+        }else{
+            $mail = User::findOrFail($request->id)->email;
+            $message->email = $mail;
+        }
+
         if ($request->id)
             $message->user_id = $request->id;
 
@@ -262,6 +304,46 @@ class HomeController extends Controller
     {
         $message = Message::where('type', 'public')->latest('created_at');
         return response()->json($message, 200);
+    }
+
+    public function downloads()
+    {
+        $navcategories = Category::where('type', 'null')->get();
+        $maincategories = Category::where('type', '!=', 'null')->get();
+        $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
+        $downloads = Download::all();
+        return view('front.download', compact('navcategories', 'maincategories', 'subcategories', 'downloads'));
+    }
+
+    public function direct(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'g-recaptcha-response' => 'required|captcha',
+            'price' => 'required|numeric',
+        ], [
+            'g-recaptcha-response.required' => 'لطفا اعتبار سنجی کنید',
+            'g-recaptcha-response.captcha' => 'مشکل در کپچرا.لطفا بعدا امتحان کنید.',
+            'price.required' => 'لطفا مبلغ خود را وارد کنید.',
+            'price.numeric' => 'لطفا مبلغ معتبر وارد کنید.',
+        ]);
+        $validator->validate();
+        $data = [
+            'mount' => $request->price,
+            'name' => $request->name,
+            'description' => $request->description
+        ];
+
+        Session::put('data', $data);
+        return redirect()->route('pay2');
+    }
+
+    public function video($id)
+    {
+        $navcategories = Category::where('type', 'null')->get();
+        $maincategories = Category::where('type', '!=', 'null')->get();
+        $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
+        $video = Ad::where('title', $id)->first();
+        return view('front.video', compact('navcategories', 'maincategories', 'subcategories', 'video'));
     }
 
 }

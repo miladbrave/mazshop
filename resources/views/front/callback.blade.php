@@ -28,7 +28,11 @@
                                             <tbody>
                                             <tr>
                                                 <td> نام کاربری</td>
-                                                <td>{{Auth()->user()->fname }}{{Auth()->user()->lname}}</td>
+                                                @if($pays->status == 'success' && Auth::check())
+                                                    <td>{{Auth()->user()->fname }}{{Auth()->user()->lname}}</td>
+                                                @else
+                                                    <td> {{$pays->name}}</td>
+                                                @endif
                                             </tr>
                                             <tr>
                                                 <td>شماره رسید پرداخت</td>

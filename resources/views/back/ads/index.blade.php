@@ -9,8 +9,8 @@
                     <div class="panel panel-default animated fadeInUp">
                         <div class="panel-body min-height-100">
                             <h1 class="page-title">
-                                <span class="icon-users"></span>
-                                لیست تبلیغات
+                                <span class="fa fa-picture-o"></span>
+                                لیست ویدیو
                                 <a href="{{route('ads.create')}}" class="btn btn-default btn-rounded pull-right"
                                    type="button">+ تبلیغات جدید </a>
                                 <hr>

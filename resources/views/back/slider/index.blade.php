@@ -9,7 +9,7 @@
                     <div class="panel panel-default animated fadeInUp">
                         <div class="panel-body min-height-100">
                             <h1 class="page-title">
-                                <span class="icon-users"></span>
+                                <span class="fa fa-list"></span>
                                 لیست اسلایدر
                                 <a href="{{route('slider.create')}}" class="btn btn-default btn-rounded pull-right"
                                    type="button">+ اسلایدر جدید </a>

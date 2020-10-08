@@ -16,8 +16,8 @@ class AddPurchList extends Migration
         Schema::create('purchlists', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('factor_number')->unsigned();
-            $table->bigInteger('product_id');
-            $table->bigInteger('count');
+            $table->string('product_id',100);
+            $table->bigInteger('count')->nullable()->default(1);
             $table->bigInteger('price');
             $table->foreign('factor_number')->references('id')->on('userlists')
                 ->onDelete('cascade')->onUpdate('cascade');

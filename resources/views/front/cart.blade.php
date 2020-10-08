@@ -28,15 +28,31 @@
                                 @foreach($cart->items as $product)
                                     <tr>
                                         <td class="text-center" style="width: 20%;">
-                                            <a href="{{route('product.self',['slug' => $product['item']->slug])}}">
-                                                <img
-                                                    src="{{asset($product['item']->photos()->first()->path)}}"
-                                                    alt="{{$product['item']->name}}" title="{{$product['item']->name}}"
-                                                    class="img-thumbnail"/>
-                                            </a>
+                                            @if(isset($product['item']->slug))
+                                                <a href="{{route('product.self',['slug' => $product['item']->slug])}}">
+                                                    <img
+                                                        src="{{asset($product['item']->photos()->first()->path)}}"
+                                                        alt="{{$product['item']->name}}"
+                                                        title="{{$product['item']->name}}"
+                                                        class="img-thumbnail"/>
+                                                </a>
+                                            @else
+                                                <a href="{{route('downloads')}}">
+                                                    <img
+                                                        src="{{asset('/front/img/download.png')}}" width="50%"
+                                                        alt="{{$product['item']->name}}"
+                                                        title="{{$product['item']->name}}"
+                                                        class="img-thumbnail"/>
+                                                </a>
+                                            @endif
                                         </td>
                                         <td class="text-left">
-                                            <a href="{{route('product.self',['slug' => $product['item']->slug])}}">{{$product['item']->name}}</a><br/>
+                                            @if(isset($product['item']->slug))
+                                                <a href="{{route('product.self',['slug' => $product['item']->slug])}}">{{$product['item']->name}}</a>
+                                                <br/>
+                                            @else
+                                                <a href="{{route('downloads')}}">{{$product['item']->title}}</a><br/>
+                                            @endif
                                         </td>
                                         <td class="text-left">
                                             {{$product['item']->sku}}
@@ -46,17 +62,30 @@
                                                 <form action="{{route('add.qty',['id'=>$product['item']])}}"
                                                       method="get">
                                                     <input type="text" name="quantity" value="{{$product['qty']}}"
-                                                           size="1"
+                                                           size="1" @if(!isset($product['item']->slug)) disabled @endif
                                                            class="form-control"/>
                                                     <span class="input-group-btn">
                                                     <input type="submit" data-toggle="tooltip" value="بروزرسانی"
-                                                           class="btn btn-primary" title="بروزرسانی محصول"><i
+                                                           class="btn btn-primary" title="بروزرسانی محصول"
+                                                           @if(!isset($product['item']->slug)) disabled @endif><i
                                                             class="fa fa-refresh"></i>
-                                                 <a type="button" data-toggle="tooltip" title="حذف محصول"
-                                                    class="btn btn-danger"
-                                                    href="{{route('remove.product',['id'=>$product['item']])}}"><i
-                                                         class="fa fa-times-circle"></i>
-                                                 </a>
+                                                        @if(isset($product['item']->slug))
+                                                            <a type="button" data-toggle="tooltip" title="حذف محصول"
+                                                               class="btn btn-danger"
+                                                               href="{{route('remove.product',['id'=>$product['item']])}}"><i
+                                                                    class="fa fa-times-circle">
+                                                                </i>
+                                                                  </a>
+                                                        @else
+                                                            <a type="button" data-toggle="tooltip" title="حذف محصول"
+                                                               class="btn btn-danger"
+                                                               href="{{route('remove.downloads',['id'=>$product['item']])}}"><i
+                                                                    class="fa fa-times-circle">
+                                                                </i>
+                                                                     </a>
+                                                        @endif
+
+
                                                  </span>
                                                 </form>
                                             </div>
@@ -122,7 +151,8 @@
                     </div>
                     <div class="buttons">
                         <div class="pull-left"><a href="{{route('home')}}" class="btn btn-default">ادامه خرید</a></div>
-                        <div class="pull-right"><a href="{{route('checkout')}}" class="btn btn-primary">تسویه حساب</a></div>
+                        <div class="pull-right"><a href="{{route('checkout')}}" class="btn btn-primary">تسویه حساب</a>
+                        </div>
                     </div>
                 </div>
             </div>

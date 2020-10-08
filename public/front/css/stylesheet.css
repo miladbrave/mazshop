@@ -329,6 +329,14 @@ a:focus { outline:none; }
 	display: inline-block;
 	padding:0px 10px;
 }
+@media screen and (max-width: 400px) {
+    #header #top-links > ul > li > a {
+        color:#fff;
+        text-transform:capitalize;
+        display: inline-block;
+        padding:0px 40px;
+    }
+}
 #header #top .links > ul > li, #header #top-links > ul > li, #language .btn-link span, #currency .btn-link span { line-height:35px; }
 #header #top-links > ul > li > a:hover, #header .links > ul > li > a:hover { text-decoration:underline; }
 .wrapper-box #header #top-links { border-right:none; }
@@ -620,6 +628,17 @@ a:focus { outline:none; }
 }
 #menu .nav > li:hover > .dropdown-menu.custom_block ul { display:table-cell; }
 #menu .nav > li > .dropdown-menu > ul { display:table-cell; }
+@media screen and (max-width: 400px) {
+    .dropdown-menu ul{
+        display: unset!important;
+    }
+    .dropdown-menu li{
+        display: list-item!important;
+    }
+    #menu .nav > li > .dropdown-menu li .dropdown-menu{
+        right: 28%!important;
+    }
+}
 #menu .nav > li > div > .column a span, #menu .nav > li > div > ul li a span {
 	font-size:18px;
 	line-height:13px;
@@ -1562,7 +1581,7 @@ visibility:hidden;
 .marketshop-banner2 > div.row div { margin-bottom:5%; }
 .marketshop-banner2 div img {
     width:100%;
-    height:270px;
+    height:300px;
     display:block;
     /*opacity: 1;*/
     -webkit-transition: all 0.1s ease-in-out;
@@ -2068,6 +2087,13 @@ div.required .control-label:before {
     height: 360px;
 }
 
+@media screen and (max-width: 400px){
+    .slider_img img{
+        width: 100%;
+        height: 310px;
+    }
+}
+
 .overlay {
     position: absolute;
     background: rgb(0, 0, 0);
@@ -2116,6 +2142,12 @@ div.required .control-label:before {
 .custom-feature-box{
     background-color: #fff6f6;
 }
+
+@media screen and (max-width: 400px) {
+    .custom-feature-box{
+        visibility: hidden;
+    }
+}
 .custom-feature-box .col-md-3{
     width: 20%;
 }
@@ -2136,6 +2168,25 @@ div.required .control-label:before {
 
 .bottom-row .col-md-2 {
     width: 12%;
+}
+
+@media screen and (max-width: 400px) {
+    .bottom-row .col-md-2 {
+        width: unset;
+    }
+    .wrapper1 ul li {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        margin: 10px 10px!important;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 5px solid #D8E2DC;
+        float: left;
+        transition: all 0.5s ease;
+    }
+
 }
 
 .product-list .image{
@@ -2405,3 +2456,73 @@ div.required .control-label:before {
 
 .modal-body p{color: black!important;direction: rtl;text-align: right}
 .modal-header h4{color: red;text-align: right}
+
+.tv{
+    background-image: url("../img/EPJwUA.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+}
+.tvtitle{
+    position: absolute;
+    color: white;
+    margin-right: 17%;
+    font-family: 'IRANSansWeb', sans-serif;
+    margin-top: 3%;
+    font-weight: bold;
+}
+.video{
+    margin-top: 10%;
+    margin-right: 18%;
+    width: 850px;
+    height: 460px;
+}
+@media screen and (max-width: 770px)  {
+    .video{
+        margin-top: 12%;
+        margin-right: 21%;
+        width: 450px;
+        height: 235px;
+    }
+    .tv{
+        background-image: url("../img/EPJwUA.jpg");
+        background-size: cover;
+        max-width: 100%;
+        height: 420px;
+    }
+    .tvtitle{
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 440px)  {
+    .video{
+        margin-top: 12%;
+        margin-right: 11%;
+        width: 245px;
+        height: 130px;
+
+    }
+    .tv{
+        background-image: url("../img/EPJwUA.jpg");
+        background-size: cover;
+        max-width: 100%;
+        height: 235px;
+    }
+    .tvtitle{
+        /*position: absolute;*/
+        /*color: white;*/
+        /*margin-right: 14%;*/
+        /*font-family: 'IRANSansWeb', sans-serif;*/
+        /*margin-top: 1%;*/
+        /*font-weight: bold;*/
+        /*font-size: 20px;*/
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 400px){
+    .pro .col-md-3{
+        width: 40%!important;
+    }
+}
+
+

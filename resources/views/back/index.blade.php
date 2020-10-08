@@ -155,8 +155,8 @@
     window.onload = function () {char();};
     function char() {
         $.ajax({
-            type: 'get', //post method
-            url: '/api/chart', //ajaxformexample url
+            type: 'get',
+            url: '/api/chart',
             dataType: "json",
             success: function (result, textStatus, jqXHR)
             {
@@ -168,7 +168,6 @@
                 renderChart(data[0], labels);
             }
         });
-        console.log(data);
         // data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
         // labels = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
         // labels = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
@@ -181,7 +180,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    backgroundColor: 'rgba(249,0,94,0.35)',
+                    backgroundColor: 'rgba(249,0,94,0.45)',
                     borderColor: 'rgb(249,8,0)',
                     label: 'This week',
                     data: data,
@@ -190,41 +189,5 @@
         });
     }
 
-
-    // $.ajax({
-    //     type: 'get', //post method
-    //     url: '/api/chart', //ajaxformexample url
-    //     dataType: "json",
-    //     success: function (result, textStatus, jqXHR)
-    //     {
-    //         console.log(result);
-    //         var j = [];
-    //         for(var i=0 ; i < result.length ; i++){
-    //              j.push(result[i])
-    //         }
-    //         chart.data.datasets.forEach((dataset) => {
-    //             dataset.data.push(j);
-    //             console.log(dataset.data);
-    //         });
-    //     }
-    // });
-    // var ctx = document.getElementById('myChart').getContext('2d');
-    // var chart = new Chart(ctx, {
-    //     type: 'line',
-    //     data: {
-    //         labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
-    //         datasets: [{
-    //             label: 'فروش کل',
-    //             backgroundColor: 'rgba(249,8,0,0.78)',
-    //             borderColor: 'rgb(255, 99, 132)',
-    //             data: [1],
-    //         }]
-    //     },
-    //     options: {
-    //         hover: {
-    //             mode: 'index'
-    //         }
-    //     }
-    // });
 
 </script>

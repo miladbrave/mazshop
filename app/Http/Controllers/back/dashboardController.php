@@ -37,13 +37,17 @@ class dashboardController extends Controller
 
     public function chartApi()
     {
-        $userlist = Userlist::where('status','success')->get()->pluck('totalprice');
-        $time = Userlist::where('status','success')->get('created_at');
+        $months = Userlist::where('status','success')->get(['totalprice','created_at'])->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('m');
+        });
+        foreach ($months as $m){
+            $test[] = $m->sum('totalprice');
+        }
         $response = [
-            "price" => $userlist,
-            "time" => $time ,
+            "price" => $test,
         ];
         return response()->json($response,200);
     }
+
 
 }

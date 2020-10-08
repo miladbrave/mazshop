@@ -16,9 +16,8 @@ class AddUserList extends Migration
         Schema::create('userlists', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->bigInteger('factor_number')->unsigned();
+            $table->bigInteger('factor')->unsigned();
             $table->bigInteger('totalprice');
-            $table->string('receive',20);
             $table->string('receiveprice',20);
             $table->string('status',10)->nullable()->default('fail');
             $table->timestamps();
