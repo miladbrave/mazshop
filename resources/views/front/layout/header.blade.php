@@ -12,34 +12,25 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="top-links" class="nav  flip">
+                    <div id="top-links" class="nav flip">
                         <ul>
-
                             @guest
-                                <li style="color: red"><i class="fa fa-pencil"></i><a href="{{route('register')}}">ثبت
+                                <li class="head"  style="color: red"><i class="fa fa-pencil"></i><a href="{{route('register')}}">ثبت
                                         نام</a>
                                 </li>
                                 @if (Route::has('register'))
-                                    <li style="color: red"><i class="fa fa-sign-in"></i><a href="{{route('login')}}">ورود</a>
+                                    <li class="head"  style="color: red"><i class="fa fa-sign-in"></i><a href="{{route('login')}}">ورود</a>
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown nd">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ auth()->user()->fname . '  ' . auth()->user()->lname }} <span
                                             class="caret"></span>
                                     </a>
-
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
                                          style="background-color: rgba(0,0,0,0.5)">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                                           style="padding-right: 6%;color: red">
-                                            خروج
-                                        </a>
-                                        <br>
                                         <a href="" onclick="event.preventDefault();
                                                      document.getElementById('profile').submit();"
                                            style="padding-right: 6%;color: red">پروفایل</a><br>
@@ -47,8 +38,14 @@
                                         @if(auth()->user()->admin == "admin")
                                             <a href="" onclick="event.preventDefault();
                                                      document.getElementById('dashboard').submit();"
-                                               style="padding-right: 6%;color: red">پنل مدیریت</a>
+                                               style="padding-right: 6%;color: red">پنل مدیریت</a>   <br>
                                         @endif
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                           style="padding-right: 6%;color: red">
+                                            خروج
+                                        </a>
 
                                         <form method="get" id="dashboard"
                                               action="{{route('administrator')}}">
@@ -63,7 +60,6 @@
                                     </div>
                                 </li>
                             @endguest
-
                         </ul>
                     </div>
                     <div id="cart">

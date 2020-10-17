@@ -91,7 +91,8 @@ class PayController extends Controller
             Session::forget('data');
         }
 
-        return view('front.callback', compact('success', 'error', 'pays', 'navcategories', 'maincategories', 'subcategories'));
+        return view('front.callback', compact( 'pays', 'navcategories', 'maincategories', 'subcategories'))
+            ->with('success', 'error');
     }
 
     public function pay2()

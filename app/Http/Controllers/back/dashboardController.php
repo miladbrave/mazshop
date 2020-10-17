@@ -15,7 +15,7 @@ class dashboardController extends Controller
     {
         $users = User::all();
         $totalrecive = Userlist::where('status','success')->get();
-        return view('back.index',compact('users','totalrecive','chart'));
+        return view('back.index',compact('users','totalrecive'));
     }
 
     public function sendmain(Request $request)

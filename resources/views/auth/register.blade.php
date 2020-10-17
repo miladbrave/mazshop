@@ -3,18 +3,18 @@
 @section('content')
     <div class="back">
         <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 justify-content-center">
+            <div class="justify-content-center">
                 <div class="card2">
-                    <div class="card-header"> ثبت نام</div>
+                    <div class="card-header" style="padding-bottom: 3%;"> ثبت نام</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="fname" class="col-md-3 text-md-left order-md-2"> نام  :</label>
+                                <label for="fname" class="col-md-3 text-md-left order-md-2"> نام :</label>
                                 <div class="col-md-6 order-md-1" style="margin-left: 21%">
                                     <input id="fname" type="text"
-                                           class="form-control @error('fname') is-invalid @enderror text-right" name="fname"
+                                           class="form-control @error('fname') is-invalid @enderror text-right"
+                                           name="fname"
                                            value="{{ old('fname') }}" required autocomplete="fname" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,10 +24,11 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="lname" class="col-md-3 text-md-left order-md-2">  نام خانوادگی :</label>
+                                <label for="lname" class="col-md-3 text-md-left order-md-2"> نام خانوادگی :</label>
                                 <div class="col-md-6 order-md-1" style="margin-left: 21%">
                                     <input id="lname" type="text"
-                                           class="form-control @error('lname') is-invalid @enderror text-right" name="lname"
+                                           class="form-control @error('lname') is-invalid @enderror text-right"
+                                           name="lname"
                                            value="{{ old('lname') }}" required autocomplete="lname" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +83,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-3 text-md-left order-md-2"> تایید رمز عبور :</label>
+                                <label for="password-confirm" class="col-md-3 text-md-left order-md-2"> تایید رمز عبور
+                                    :</label>
                                 <div class="col-md-6 order-md-1" style="margin-left: 21%">
                                     <input id="password-confirm" type="password" class="form-control"
                                            name="password_confirmation" required autocomplete="new-password">
@@ -100,7 +102,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 @endsection

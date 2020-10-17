@@ -6,24 +6,28 @@
             <div id="content" class="col-xs-12">
                 <div class="slideshow single-slider owl-carousel">
                     @foreach($sliders->where('number','ویژه') as $slider)
-                        <div class="item slider_img"><a href="{{$slider->link}}"><img class="img-responsive"
-                                                                                      src="{{asset($slider->photo()->first()->path)}}"
-                                                                                      alt="banner 2"/></a></div>
+                        <div class="item slider_img"><a href="{{$slider->link}}">
+                                <img class="img-responsive"
+                                     src="{{asset($slider->photo()->first()->path)}}"
+                                     alt="banner 2"/></a></div>
                     @endforeach
                     @foreach($sliders->where('number',1) as $slider)
-                        <div class="item slider_img"><a href="{{$slider->link}}"><img class="img-responsive"
-                                                                                      src="{{asset($slider->photo()->first()->path)}}"
-                                                                                      alt="banner 2"/></a></div>
+                        <div class="item slider_img"><a href="{{$slider->link}}">
+                                <img class="img-responsive"
+                                     src="{{asset($slider->photo()->first()->path)}}"
+                                     alt="banner 2"/></a></div>
                     @endforeach
                     @foreach($sliders->where('number',2) as $slider)
-                        <div class="item slider_img"><a href="{{$slider->link}}"><img class="img-responsive"
-                                                                                      src="{{asset($slider->photo()->first()->path)}}"
-                                                                                      alt="banner 2"/></a></div>
+                        <div class="item slider_img"><a href="{{$slider->link}}">
+                                <img class="img-responsive"
+                                     src="{{asset($slider->photo()->first()->path)}}"
+                                     alt="banner 2"/></a></div>
                     @endforeach
                     @foreach($sliders->where('number',3) as $slider)
-                        <div class="item slider_img"><a href="{{$slider->link}}"><img class="img-responsive"
-                                                                                      src="{{asset($slider->photo()->first()->path)}}"
-                                                                                      alt="banner 2"/></a></div>
+                        <div class="item slider_img"><a href="{{$slider->link}}">
+                                <img class="img-responsive"
+                                     src="{{asset($slider->photo()->first()->path)}}"
+                                     alt="banner 2"/></a></div>
                     @endforeach
                 </div>
 
@@ -318,7 +322,8 @@
                 <div class="marketshop-banner2">
                     <div class="row">
                         @foreach($ads as $ad)
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="ad"><a href="{{route('video',["id" => $ad->title])}}"><img
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="ad"><a
+                                    href="{{route('video',["id" => $ad->title])}}"><img
                                         src="{{asset($ad->photo()->first()->path)}}"
                                         alt="{{$ad->title}}"/></a>
                                 <div class="overlay2">{{$ad->title}}</div>
@@ -489,13 +494,13 @@
                                             <h4 class="modal-title" id="exampleModalLongTitle">شماره حساب</h4>
                                         </div>
                                         <div class="modal-body">
-                                          <p>
-                                              بانک ملت
-                                              <br>
-                                              6104337915729857
-                                              <br>
-                                              علی یزدانی
-                                          </p>
+                                            <p>
+                                                بانک ملت
+                                                <br>
+                                                6104337915729857
+                                                <br>
+                                                علی یزدانی
+                                            </p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary pull-right"

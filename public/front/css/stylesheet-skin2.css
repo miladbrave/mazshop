@@ -18,15 +18,15 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
     0%   {left:0px; top:0px;}
 }
 
-@media screen and (min-width:765px) {
-    #cart .cart{position: relative;animation-name: example;
-        animation-duration: 4s;animation-iteration-count: infinite;}
-    @keyframes example {
-        0%   {left:0px; top:0px;}
-        50%  {left:200px; top:0px;}
-        100%  {left:0px; top:0px;}
-    }
-}
+/*@media screen and (min-width:765px) {*/
+/*    #cart .cart{position: relative;animation-name: example;*/
+/*        animation-duration: 4s;animation-iteration-count: infinite;}*/
+/*    @keyframes example {*/
+/*        0%   {left:0px; top:0px;}*/
+/*        50%  {left:200px; top:0px;}*/
+/*        100%  {left:0px; top:0px;}*/
+/*    }*/
+/*}*/
 #header .header-row {
 	/*background-color:#131313;*/
     padding:20px 0;

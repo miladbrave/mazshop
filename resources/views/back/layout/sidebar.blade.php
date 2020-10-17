@@ -1,6 +1,6 @@
 <div class="page-sidebar">
     <header class="site-header">
-        <div class="site-logo"><a href="index.html"><img src="{{asset('/front/img/LOGO-ROYE-DASTE-high.png')}}" alt="Mouldifi" title="Mouldifi"></a></div>
+        <div class="site-logo"><a href="{{route('home')}}"><img src="{{asset('/front/img/LOGO-ROYE-DASTE-high.png')}}" alt="Mouldifi" title="Mouldifi"></a></div>
         <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
         <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
     </header>

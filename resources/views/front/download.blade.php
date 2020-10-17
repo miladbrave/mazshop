@@ -53,13 +53,13 @@
                             @foreach($downloads as $download)
                                 <div class="product-layout product-list col-xs-12">
                                     <div class="product-thumb">
-                                        <div class="image"><a href="{{route('product.self',$download->title)}}"><img
+                                        <div class="image"><img
                                                     src="{{asset('/front/img/download.png')}}" width="80%"
                                                     alt="{{$download->title}}" title="{{$download->title}}"
-                                                    class="img-responsive"/></a></div>
+                                                    class="img-responsive"/></div>
                                         <div>
                                             <div class="caption">
-                                                <h3><a href="{{route('product.self',$download->title)}}"> {{$download->title}} </a></h3>
+                                                <h3>{{$download->title}}</h3>
                                                 <p>{!! Str::limit($download->description,150) !!}</p>
 
                                                 <p class="price">
