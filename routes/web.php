@@ -23,6 +23,7 @@ Route::get('/profile','front\HomeController@profile')->name('profile');
 Route::post('messages/{id?}','front\HomeController@message')->name('contact.messages');
 Route::get('removedownloads/{id}','front\HomeController@removedownload')->name('remove.downloads');
 Route::get('downloads','front\HomeController@downloads')->name('downloads');
+Route::patch('userupdate','front\HomeController@userUpdate')->name('userUpdate');
 
 Route::get('payStatus','front\PayController@payStatus')->name('payStatus');
 Route::get('pay','front\PayController@pay')->name('pay');

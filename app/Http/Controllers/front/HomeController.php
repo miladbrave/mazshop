@@ -15,6 +15,8 @@ use App\Slider;
 use App\User;
 use App\Userlist;
 use App\Message;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -167,7 +169,6 @@ class HomeController extends Controller
         return back();
     }
 
-
     public function addqty(Request $request, $id)
     {
         $product = Product::with('photos')->findOrFail($id);
@@ -239,23 +240,29 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $navcategories = Category::where('type', 'null')->get();
-        $maincategories = Category::where('type', '!=', 'null')->get();
-        $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
-        $userlists = Userlist::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
-        foreach ($userlists->pluck('id') as $userlist) {
-            $purchlist[] = Purchlist::whereIn('factor_number', [$userlist])->get();
-        }
-//        foreach ($purchlist->product_id as $purch) {
+        if (Auth::check()) {
+            $navcategories = Category::where('type', 'null')->get();
+            $maincategories = Category::where('type', '!=', 'null')->get();
+            $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
+            $userlists = Userlist::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            foreach ($userlists->pluck('id') as $userlist) {
+                $purchlist[] = Purchlist::whereIn('factor_number', [$userlist])->get();
+            }
+            if (!isset($purchlist)) {
+                $purchlist = null;
+            }
+
+            //        foreach ($purchlist->product_id as $purch) {
 //            foreach ($purch as $p) {
 //                $purchdownload[] = Download::where('id', 'like',  '%' . $p->product_id .'%')->get();
 //            }
 //        }
-
-        $purchl = Product::with('photos')->get();
-        $messages = Message::where('type', 'send')->get();
-        $downloads = Download::all();
-        return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'purchlist', 'userlists', 'purchl', 'messages', 'downloads'));
+            $purchl = Product::with('photos')->get();
+            $messages = Message::where('type', 'send')->get();
+            $downloads = Download::all();
+            return view('front.profile', compact('navcategories', 'maincategories', 'subcategories', 'purchlist', 'userlists', 'purchl', 'messages', 'downloads'));
+        }
+        return redirect()->route('login');
     }
 
     public function message(Request $request)
@@ -282,7 +289,7 @@ class HomeController extends Controller
 
         if (!$request->id) {
             $message->email = $request->email;
-        }else{
+        } else {
             $mail = User::findOrFail($request->id)->email;
             $message->email = $mail;
         }
@@ -344,6 +351,41 @@ class HomeController extends Controller
         $subcategories = Category::whereRaw("type REGEXP '^[0-9]'")->get();
         $video = Ad::where('title', $id)->first();
         return view('front.video', compact('navcategories', 'maincategories', 'subcategories', 'video'));
+    }
+
+    public function userUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fname' => 'required',
+            'lname' => 'required',
+            'phone' => 'required|min:7|max:12',
+//            'city' => 'required',
+//            'address' => 'required',
+//            'postcode' => 'numeric',
+        ], [
+            'fname.required' => 'لطفا نام خود را وارد کنید.',
+            'lname.required' => 'لطفا نام خانوادگی خود را وارد کنید.',
+            'phone.required' => 'لطفا تلفن تماس خود را وارد کنید',
+            'phone.min' => 'لطفا شماره تماس معتبر وارد کنید.',
+            'phone.max' => 'لطفا شماره تماس معتبر وارد کنید.',
+//            'city.required' => 'لطفا شهر خود را وارد کنید.',
+//            'address.required' => 'لطفا آدرس خود را وارد کنید.',
+//            'postcode.required' => 'لزفا کد پستی خود را وارد کنید.',
+//            'postcode.numeric' => 'لطفا کدپستی معتبر وارد کنید.',
+        ]);
+        $validator->validate();
+
+        $user = User::find(auth()->user()->id);
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
+        $user->phone = $request->phone;
+        $user->city = $request->city;
+        $user->address = $request->address;
+        $user->postcode = $request->postcode;
+//        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back();
     }
 
 }

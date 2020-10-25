@@ -24,12 +24,12 @@
             <!--                </select>-->
             <!--            </div>-->
 
-            <div class="form-group col-md-3">
+            <div class="col-md-3">
                 <label class="col-sm-9 control-label">دسته بندی </label>
-                <select class="form-control " name="maincategory" v-model="maincategories_select"
+                <select class="form-group" name="maincategory" v-model="maincategories_select"
                         @change="mainchange($event)">
                     <option v-if="pro" v-for="maincategoy in maincategories"
-                            :select="maincategories_select.toString() === maincategoy.id" :value="maincategoy.id">{{
+                            :selected="maincategories_select.toString() === maincategoy.id" :value="maincategoy.id">{{
                         maincategoy.title }}
                     </option>
                     <option v-if="!pro" v-for="maincategoy in maincategories" :value="maincategoy.id">{{
@@ -43,7 +43,7 @@
                 <div class="form-group col-md-2" v-for="attribute in attributes">
                     <label>ویژگی {{attribute.title}}</label>
                     <select name="attributes[]" class="form-control">
-                        <option v-for="attributevalues in attribute.attributevalue" :value="attributevalues.id">
+                        <option v-if="pro" v-for="attributevalues in attribute.attributevalue" :value="attributevalues.id">
                             {{attributevalues.title}}
                         </option>
                     </select>
